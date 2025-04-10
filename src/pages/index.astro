@@ -1,11 +1,60 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import MainLayout from '../layouts/Layout.astro';
+import LinkedIn from '../icons/LinkedIn.astro';
+import SocialPill from '../icons/SocialPill.astro';
+import SocialPillMail from '../icons/SocialPillMail.astro';
+import GitHub from '../icons/GitHub.astro';
+import IconMail from '../icons/IconMail.astro';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout title="PortFolio de Georgi Borisov Aleksandrov - Desarrollador y Programador"
+  description="Si buscas un desarrollador junior, con experiencia en desarrollo de software, apasionado por las soluciones innovadoras y el aprendizaje continuo, estaré encantado de colaborar en tu proyecto.">
+
+  <main>
+    <section class="w-full mx-auto lg:w-[880px] py-44">
+      <img class="rounded-full w-25 h-25 object-cover mb-5" src="../../public/logo.jpg" alt="Georgi photo">
+      <h1 class="text-white text-5xl font-bold mb-4">
+        Soy Georgi (GeorgiF0x), Desarrollador de Software
+        <a href="https://linkedin.com/in/georgi-borisov-dev" target="_blank">
+          <span class="align-middle inline-flex items-center bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full ml-3">
+            Disponible para oportunidades y proyectos
+          </span>
+        </a>
+      </h1>
+
+      <h2 class="text-xl mt-1 text-wrap">
+        <span class="text-yellow-200/90 opacity-80">Desarrollador Junior</span> con ganas de crecer, aprender y ganar experiencia en este mundo.</br>
+        📍 <span class="text-red-100/90 opacity-80">De Zamora, España</span> 🇪🇸 — Mi objetivo es crear soluciones y aplicaciones únicas.
+      </h2>
+
+      <div class="flex justify-center items-center gap-4">
+        <ul class="flex gap-4 items-center">
+          <li>
+            <SocialPill href="https://linkedin.com/in/georgi-borisov-dev">
+              <LinkedIn class="w-6 h-6"/>
+              LinkedIn
+            </SocialPill>
+          </li>
+          <li>
+            <SocialPill href="https://github.com/GeorgiF0x">
+              <GitHub class="w-6 h-6"/>
+              GitHub
+            </SocialPill>
+          </li>
+		  <li>
+			<SocialPillMail href="mailto:ge0rgid3v@gmail.com?subject=Consulta%20sobre%20mi%20portafolio&body=Hola%20Georgi,%20me%20interesa%20tu%20trabajo" rel="noopener noreferrer">
+			  <IconMail class="w-6 h-6" />
+			  ge0rgid3v@gmail.com
+			</SocialPillMail>
+		  </li>
+		  
+		  
+		  
+        </ul>
+      </div>
+	  
+    </section>
+	
+  </main>
+
+</MainLayout>
