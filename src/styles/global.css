@@ -1,1 +1,6 @@
 @import "tailwindcss";
+.modal-image {
+    max-height: 80vh;
+    max-width: 90vw;
+  }
+  

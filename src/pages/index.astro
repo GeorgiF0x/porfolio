@@ -5,56 +5,114 @@ import SocialPill from '../icons/SocialPill.astro';
 import SocialPillMail from '../icons/SocialPillMail.astro';
 import GitHub from '../icons/GitHub.astro';
 import IconMail from '../icons/IconMail.astro';
+import SectionContainer from '../icons/SectionContainer.astro';
+import CodeIcon from "../icons/CodeIcon.astro";
+import Experience from '../components/Experience.astro';
+import BriefCaseIcon from '../icons/BriefCaseIcon.astro';
+import Proyects from '../components/Proyects.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <MainLayout title="PortFolio de Georgi Borisov Aleksandrov - Desarrollador y Programador"
-  description="Si buscas un desarrollador junior, con experiencia en desarrollo de software, apasionado por las soluciones innovadoras y el aprendizaje continuo, estaré encantado de colaborar en tu proyecto.">
+  description="Si buscas un desarrollador junior con ganas de aprender y aportar, estaré encantado de colaborar en tu proyecto.">
 
-  <main>
-    <section class="w-full mx-auto lg:w-[880px] py-44">
-      <img class="rounded-full w-25 h-25 object-cover mb-5" src="../../public/logo.jpg" alt="Georgi photo">
-      <h1 class="text-white text-5xl font-bold mb-4">
-        Soy Georgi (GeorgiF0x), Desarrollador de Software
-        <a href="https://linkedin.com/in/georgi-borisov-dev" target="_blank">
-          <span class="align-middle inline-flex items-center bg-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full ml-3">
-            Disponible para oportunidades y proyectos
-          </span>
-        </a>
-      </h1>
+  <main class="px-4 sm:px-6">
+    <!-- Sección Hero -->
+    <SectionContainer class="pt-24 pb-12 md:py-44">
+      <div class="flex flex-col items-center md:flex-row md:items-start gap-6">
+        <!-- Foto de perfil -->
+        <div class="flex flex-col items-center md:items-start">
+          <img class="rounded-full w-28 h-28 sm:w-32 sm:h-32 object-cover border-2 border-yellow-400" 
+               src="../../public/logo.jpg" 
+               alt="Georgi photo" />
+          
+          <!-- Redes sociales solo en móvil -->
+          <div class="md:hidden mt-4">
+            <ul class="flex flex-wrap justify-center gap-3">
+              <li>
+                <SocialPill href="https://linkedin.com/in/georgi-borisov-dev" class="!px-3 !py-1">
+                  <LinkedIn class="w-5 h-5" />
+                </SocialPill>
+              </li>
+              <li>
+                <SocialPill href="https://github.com/GeorgiF0x" class="!px-3 !py-1">
+                  <GitHub class="w-5 h-5" />
+                </SocialPill>
+              </li>
+              <li>
+                <SocialPillMail>
+                  <IconMail class="w-5 h-5" />
+                </SocialPillMail>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-      <h2 class="text-xl mt-1 text-wrap">
-        <span class="text-yellow-200/90 opacity-80">Desarrollador Junior</span> con ganas de crecer, aprender y ganar experiencia en este mundo.</br>
-        📍 <span class="text-red-100/90 opacity-80">De Zamora, España</span> 🇪🇸 — Mi objetivo es crear soluciones y aplicaciones únicas.
-      </h2>
+        <!-- Información principal -->
+        <div class="flex-1 text-center md:text-left">
+          <h1 class="text-white text-2xl sm:text-3xl font-bold leading-tight" id="sobre-mi">
+            Soy <span class="text-yellow-400">Georgi (GeorgiF0x)</span>,<br class="hidden sm:block"> Desarrollador de Software
+          </h1>
+          
+          <a href="https://linkedin.com/in/georgi-borisov-dev" target="_blank" class="inline-block mt-3">
+            <span class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-3 py-1 rounded-full transition-colors">
+              Disponible para oportunidades
+            </span>
+          </a>
 
-      <div class="flex justify-center items-center gap-4">
-        <ul class="flex gap-4 items-center">
-          <li>
-            <SocialPill href="https://linkedin.com/in/georgi-borisov-dev">
-              <LinkedIn class="w-6 h-6"/>
-              LinkedIn
-            </SocialPill>
-          </li>
-          <li>
-            <SocialPill href="https://github.com/GeorgiF0x">
-              <GitHub class="w-6 h-6"/>
-              GitHub
-            </SocialPill>
-          </li>
-		  <li>
-			<SocialPillMail href="mailto:ge0rgid3v@gmail.com?subject=Consulta%20sobre%20mi%20portafolio&body=Hola%20Georgi,%20me%20interesa%20tu%20trabajo" rel="noopener noreferrer">
-			  <IconMail class="w-6 h-6" />
-			  ge0rgid3v@gmail.com
-			</SocialPillMail>
-		  </li>
-		  
-		  
-		  
-        </ul>
+          <div class="mt-4 space-y-3">
+            <p class="text-gray-300 text-base leading-relaxed">
+              Soy un <span class="text-yellow-200 font-medium">desarrollador junior</span> con muchas ganas de seguir aprendiendo y crecer profesionalmente.
+            </p>
+            
+            <p class="text-gray-300 text-base leading-relaxed">
+              📍 <span class="text-red-200">Zamora, España</span> 🇪🇸<br>
+              Mi objetivo es crear soluciones y aplicaciones únicas.
+            </p>
+          </div>
+
+          <!-- Redes sociales solo en desktop -->
+          <div class="hidden md:block mt-6" id="contacto">
+            <ul class="flex flex-wrap gap-3">
+              <li>
+                <SocialPill href="https://linkedin.com/in/georgi-borisov-dev">
+                  <LinkedIn class="w-5 h-5" />
+                  LinkedIn
+                </SocialPill>
+              </li>
+              <li>
+                <SocialPill href="https://github.com/GeorgiF0x">
+                  <GitHub class="w-5 h-5" />
+                  GitHub
+                </SocialPill>
+              </li>
+              <li>
+                <SocialPillMail href="mailto:ge0rgid3v@gmail.com">
+                  <IconMail class="w-5 h-5" />
+                  Contactar
+                </SocialPillMail>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-	  
-    </section>
-	
+      <!-- Sección Experiencia -->
+      <SectionContainer  class="py-12">
+        <h2 class="text-3xl sm:text-3xl font-semibold text-white text-center mb-8 flex justify-center items-center gap-2 mt-5" id="experiencia">
+          <BriefCaseIcon class="w-6 h-6 sm:w-7 sm:h-7"/>
+          Experiencia Laboral
+        </h2>
+        <Experience />
+      </SectionContainer>
+  
+      <SectionContainer id="proyectos" class="py-12">
+        <h2 class="text-3xl sm:text-3xl font-semibold text-white text-center mb-8 flex justify-center items-center gap-2 mt-5" id="proyectos" >
+          <CodeIcon class="w-6 h-6 sm:w-7 sm:h-7"/>
+          Proyectos
+        </h2>
+        <Proyects/>
+      </SectionContainer>
+    </SectionContainer>
   </main>
-
+  <Footer/>
 </MainLayout>

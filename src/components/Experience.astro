@@ -1,0 +1,27 @@
+---
+import ExperienceItem from '../icons/ExperienceItem.astro';
+
+const EXPERIENCE = [
+{
+  title: "Desarrollador Full Stack – Prácticas Profesionales",
+  date: "Octubre - Diciembre 2024",
+  description: "Desarrollé una tienda online usando Spring Boot y API REST, mejorando la experiencia con AJAX. Además, implementé un chatbot con IA para interactuar con los usuarios y diseñé una interfaz moderna con Bootstrap. También tuve la oportunidad de crear un microservicio en Python para un proyecto de IA interno.",
+},
+{
+  title: "Proyecto Final DAW – Gestión de Protectora Animal",
+  date: "Noviembre - Diciembre 2024",
+  description: "Creé una aplicación web para gestionar una protectora animal, aprovechando Spring y API REST. Incorporé un dashboard completo para administradores con funcionalidades asincrónicas, además de integrar pagos con Stripe y un sistema de contacto con Telegram. La interfaz es responsiva gracias a Bootstrap, enfocada en ofrecer una experiencia ágil para todos los usuarios.",
+}
+
+
+
+];
+---
+<ol class="flex flex-col sm:flex-row sm:overflow-x-auto gap-y-6 sm:gap-x-10 px-4 sm:px-8 mt-1">
+  {EXPERIENCE.map((item, index) => (
+    <ExperienceItem {...item} />
+  ))}
+</ol>
+
+
+

@@ -1,41 +1,128 @@
 ---
+import Modal from "../components/Modal.astro";
 import "@fontsource-variable/onest"
-import Header from '../components/Header.astro'; // Importar el componente Header
-import '../styles/global.css'; // Si tienes algún archivo de estilos globales
+import Header from '../components/Header.astro';
+import '../styles/global.css';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>PortFolio Georgi Borisov</title>
-  </head>
-  <body class="bg-gray-900 text-white flex items-center mt-5 h-screen flex-col">
-	<div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
-    <Header />
+    
+    <style is:global>
+      :root {
+        color-scheme: light dark;
+        --header-height: 80px;
+      }
 
-    <!-- Aquí se renderiza el contenido de las páginas que usen este layout -->
-    <slot />
+      html {
+        font-family: "Onest Variable", system-ui, sans-serif;
+        scroll-behavior: smooth;
+        scroll-padding-top: var(--header-height);
+        height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        color: white;
+      }
+
+      /* Scrollbar personalizada */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e1e1e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #6366f1;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  
+  <body class="min-h-screen bg-fixed">
+    <!-- Fondo específico que solicitaste -->
+    <div 
+      class="fixed inset-0 -z-50 h-screen w-full bg-gradient-to-br from-black via-[#000022] to-[#630063]"
+      aria-hidden="true"
+    ></div>
+    
+    <!-- Contenido principal -->
+    <div class="relative z-10 min-h-screen flex flex-col">
+      <Header client:load />
+      
+      <main id="top" class="flex-1">
+        <slot />
+      </main>
+    </div>
+
+    <Modal />
+
+    <!-- Script para scroll suave -->
+    <script is:inline>
+      // Función para scroll suave
+      function smoothScroll(event) {
+        if (event.target.tagName === 'A' && event.target.getAttribute('href').startsWith('#')) {
+          event.preventDefault();
+          const targetId = event.target.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const headerHeight = document.querySelector('header')?.offsetHeight || 80;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+
+            if (targetId !== '#top') {
+              history.pushState(null, '', targetId);
+            } else {
+              history.pushState(null, '', ' ');
+            }
+          }
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('click', smoothScroll);
+        
+        const sections = document.querySelectorAll('[id]');
+        const navLinks = document.querySelectorAll('header nav a');
+        
+        function updateActiveLink() {
+          let current = '';
+          
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= (sectionTop - 150)) {
+              current = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('text-yellow-400', 'font-medium');
+            if (link.getAttribute('href') === `#${current}`) {
+              link.classList.add('text-yellow-400', 'font-medium');
+            }
+          });
+        }
+        
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+      });
+    </script>
   </body>
 </html>
-
-<style>
-  :root {
-    color-scheme: light dark;
-  }
-
-  html {
-    font-family: "Onest Variable", system-ui, sans-serif;
-  }
-
-  body {
-    background: #05050505;
-    display: flex;
-	flex-direction: column;
-  
-	height: 100vh;
-  }
-</style>

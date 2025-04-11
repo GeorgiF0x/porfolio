@@ -1,0 +1,149 @@
+---
+import CodeIcon from "../icons/CodeIcon.astro";
+import JavaScriptIcon from "../icons/JavaScriptIcon.astro";
+import SpringIcon from "../icons/SpringIcon.astro";
+import Mysqlicon from "../icons/Mysqlicon.astro";
+import StripeIcon from "../icons/StripeIcon.astro";
+import TelegramIcon from "../icons/TelegramIcon.astro";
+import OpenAiIcon from "../icons/OpenAiIcon.astro";
+
+// Definir las etiquetas y asociarlas con su ícono y clase
+const TAGS = {
+  JAVASCRIPT: { name: "JavaScript", icon: JavaScriptIcon, class: "bg-yellow-500 text-black" },
+  SPRING: { name: "Spring", icon: SpringIcon, class: "bg-green-600 text-white" },
+  JPA: { name: "JPA", icon: CodeIcon, class: "bg-blue-600 text-white" },
+  AJAX: { name: "AJAX", icon: CodeIcon, class: "bg-blue-500 text-white" },
+  MYSQL: { name: "MySQL", icon: Mysqlicon, class: "bg-gray-600 text-white" },
+  HIBERNATE: { name: "Hibernate", icon: CodeIcon, class: "bg-gray-500 text-white" },
+  TELEGRAM: { name: "Telegram", icon: TelegramIcon, class: "bg-blue-400 text-white" },
+  OPENAI: { name: "OpenAI", icon: OpenAiIcon, class: "bg-black text-white" },
+  STRIPE: { name: "Stripe", icon: StripeIcon, class: "bg-black text-white" },
+};
+
+// Definición de los proyectos con array de imágenes
+const PROJECTS = [
+  {
+    title: "Proyecto Tienda",
+    description: "Proyecto web de e-commerce desarrollado con Spring Boot, Hibernate, MySQL.",
+    link: "#",
+    github: "https://github.com/GeorgiF0x/ProyectoTiendaSpring",
+    image: [
+      "/projects/tienda/tienda.webp",
+      "/projects/tienda/tienda_admin.webp"
+    ],
+    tags: [
+      "JAVASCRIPT",
+      "SPRING",
+      "JPA",
+      "AJAX",
+      "MYSQL",
+      "HIBERNATE",
+      "TELEGRAM",
+      "OPENAI",
+    ],
+  },
+  {
+    title: "Gestión de Protectora Animal",
+    description: "Desarrollé una aplicación web para gestionar una protectora animal usando Spring Boot y API REST. Incluye un dashboard completo para administradores, integración con pagos a través de Stripe y comunicación con Telegram para soporte.",
+    link: "#",
+    github: "https://github.com/GeorgiF0x",
+    image: [
+      "/projects/prote/prote_user.webp",
+      "/projects/prote/prote_admin.webp"
+    ],
+    tags: [
+      "JAVASCRIPT",
+      "SPRING",
+      "JPA",
+      "AJAX",
+      "MYSQL",
+      "HIBERNATE",
+      "STRIPE",
+      "TELEGRAM",
+    ],
+  },
+];
+---
+
+{PROJECTS.map(({ title, description, tags, image, link, github }) => (
+  <article class="bg-zinc-900 rounded-2xl shadow-[0_0_15px_rgba(255,255,255,0.05)] p-6 mb-10 transition-transform hover:scale-[1.01] hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+    <h3 class="text-2xl font-semibold text-yellow-400 mb-2">{title}</h3>
+    <p class="text-lg mb-4 text-pretty italic text-zinc-300">{description}</p>
+
+    <!-- Tags de tecnologías -->
+    <ul class="flex flex-wrap gap-2 mb-6">
+      {tags.map((tagKey) => {
+        const tag = TAGS[tagKey];
+        const Icon = tag.icon;
+        return (
+          <li class={`flex items-center justify-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium leading-none ${tag.class}`}>
+            <Icon class="w-4 h-4 flex-shrink-0" />
+            <span class="flex-shrink-0">{tag.name}</span>
+          </li>
+        );
+      })}
+    </ul>
+
+    <!-- Grid de 2 columnas para las imágenes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {image.map((img, index) => (
+        <div class="overflow-hidden rounded-xl border border-white/10">
+          <img
+            src={img}
+            alt={`screenshot ${index + 1} del proyecto ${title}`}
+            class="w-full h-auto object-cover transition-transform duration-300 hover:scale-105 cursor-pointer"
+            loading="lazy"
+            data-modal-target={`#modal-${title}-${index}`} // Usamos un data attribute para identificar la imagen
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Enlaces del proyecto -->
+    <div class="mt-4 flex gap-3">
+      <a href={github} class="text-sm text-zinc-400 hover:underline" target="_blank">
+        Código en GitHub
+      </a>
+    </div>
+
+    <!-- Modal para imagen expandida -->
+    {image.map((img, index) => (
+      <div id={`modal-${title}-${index}`} class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div class="relative bg-zinc-900 p-4 rounded-lg">
+          <button class="absolute top-2 right-2 text-white close-modal">X</button>
+          <img src={img} alt="Imagen ampliada" class="w-auto h-auto max-w-full max-h-[80vh]" />
+        </div>
+      </div>
+    ))}
+  </article>
+))}
+
+<script>
+  // Script para manejar la apertura y cierre del modal
+  const modalTriggers = document.querySelectorAll('[data-modal-target]');
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function() {
+      const modalId = this.getAttribute('data-modal-target');
+      const modal = document.querySelector(modalId);
+      modal.classList.remove('hidden');
+    });
+  });
+
+  const closeButtons = document.querySelectorAll('.close-modal');
+  closeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const modal = this.closest('.modal');
+      modal.classList.add('hidden');
+    });
+  });
+
+  // Cerrar modal si se hace clic fuera de la imagen
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach(modal => {
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  });
+</script>
